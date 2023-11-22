@@ -35,9 +35,11 @@ def callback():
 
 @line_handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    line_bot_api.reply_message(
-        event.reply_token,
-        TextSendMessage(text="好的，我乖乖閉嘴 > <，如果想要我繼續說話，請跟我說 「說話」 > <"))
+    user_message = event.message.text
+    print(f"text: {user_message}, user_id: {event.source.user_id}")
+    
+    reply_message = TextSendMessage(text=user_message)
+    line_bot_api.reply_message(event.reply_token, reply_message)
     return
 
 if __name__ == "__main__":
