@@ -9,12 +9,16 @@ line_bot_api = LineBotApi(os.getenv("LINE_CHANNEL_ACCESS_TOKEN"))
 line_handler = WebhookHandler(os.getenv("LINE_CHANNEL_SECRET"))
 working_status = os.getenv("DEFALUT_TALKING", default = "true").lower() == "true"
 
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+    
 app = Flask(__name__)
 
 # domain root
 @app.route('/')
 def home():
-    print("Hello, World!")
+    logger.info("from logger print Hello, World")
+    print('print Hello, World!')
     return 'Hello, World!'
 
 @app.route("/webhook", methods=['POST'])
