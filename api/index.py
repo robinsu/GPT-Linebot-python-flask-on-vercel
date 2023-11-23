@@ -41,9 +41,15 @@ def callback():
 def handle_message(event):
     user_message = event.message.text
     print(f"text: {user_message}, user_id: {event.source.user_id}")
-    
-    reply_message = TextSendMessage(text=user_message)
-    line_bot_api.reply_message(event.reply_token, reply_message)
+
+    if "吃" in event.message.text:
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text="多少錢呢？ "))
+        return
+    else:
+        reply_message = TextSendMessage(text=user_message)
+        line_bot_api.reply_message(event.reply_token, reply_message)
     return
 
 if __name__ == "__main__":
